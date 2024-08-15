@@ -27,7 +27,7 @@ import { PluginEndpointDiscovery } from '@backstage/backend-common';
 import { PluginTaskScheduler } from '@backstage/backend-tasks';
 import { RootLoggerService } from '@backstage/backend-plugin-api';
 import { Router } from 'express';
-import { ServiceFactoryCompat } from '@backstage/backend-plugin-api';
+import { ServiceFactory } from '@backstage/backend-plugin-api';
 import { ServiceRef } from '@backstage/backend-plugin-api';
 import { TaskRunner } from '@backstage/backend-tasks';
 import { TemplateAction } from '@backstage/plugin-scaffolder-node';
@@ -113,22 +113,20 @@ export interface DynamicPluginsFactoryOptions {
 }
 
 // @public (undocumented)
-export const dynamicPluginsFeatureDiscoveryServiceFactory: ServiceFactoryCompat<
+export const dynamicPluginsFeatureDiscoveryServiceFactory: ServiceFactory<
   FeatureDiscoveryService,
   'root',
-  'singleton',
-  undefined
+  'singleton'
 >;
 
 // @public (undocumented)
 export const dynamicPluginsFrontendSchemas: BackendFeature;
 
 // @public (undocumented)
-export const dynamicPluginsRootLoggerServiceFactory: ServiceFactoryCompat<
+export const dynamicPluginsRootLoggerServiceFactory: ServiceFactory<
   RootLoggerService,
   'root',
-  'singleton',
-  undefined
+  'singleton'
 >;
 
 // @public (undocumented)
@@ -145,20 +143,28 @@ export interface DynamicPluginsSchemasService {
 }
 
 // @public (undocumented)
-export const dynamicPluginsSchemasServiceFactory: ServiceFactoryCompat<
+export const dynamicPluginsSchemasServiceFactory: ServiceFactory<
   DynamicPluginsSchemasService,
   'root',
-  'singleton',
-  DynamicPluginsSchemasOptions
+  'singleton'
 >;
 
 // @public (undocumented)
-export const dynamicPluginsServiceFactory: ServiceFactoryCompat<
+export const dynamicPluginsSchemasServiceFactoryWithOptions: (
+  options?: DynamicPluginsSchemasOptions,
+) => ServiceFactory<DynamicPluginsSchemasService, 'root', 'singleton'>;
+
+// @public (undocumented)
+export const dynamicPluginsServiceFactory: ServiceFactory<
   DynamicPluginProvider,
   'root',
-  'singleton',
-  DynamicPluginsFactoryOptions
+  'singleton'
 >;
+
+// @public (undocumented)
+export const dynamicPluginsServiceFactoryWithOptions: (
+  options?: DynamicPluginsFactoryOptions,
+) => ServiceFactory<DynamicPluginProvider, 'root', 'singleton'>;
 
 // @public (undocumented)
 export const dynamicPluginsServiceRef: ServiceRef<

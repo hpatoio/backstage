@@ -81,7 +81,7 @@ describe('catalogModuleGitlabOrgDiscoveryEntityProvider', () => {
     await startTestBackend({
       extensionPoints: [[catalogProcessingExtensionPoint, extensionPoint]],
       features: [
-        eventsServiceFactory(),
+        eventsServiceFactory,
         catalogModuleGitlabOrgDiscoveryEntityProvider,
         mockServices.rootConfig.factory({ data: config }),
         mockServices.logger.factory(),
